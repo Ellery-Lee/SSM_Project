@@ -9,12 +9,13 @@
         <!-- 配置mysql的环境 -->
         <environment id="mysql">
             <!-- 配置事务的类型 -->
-            <transactionManager type="JDBC"></transactionManager>
+            <transactionManager type="JDBC"/>
             <!-- 配置数据源（连接池） -->
             <dataSource type="POOLED">
                 <!-- 配置连接数据库的4个基本信息 -->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/eesy_mybatis"/>
+                <!-- 注意mysql8.0版本的driver要加cj，并且数据库源要在后面加时区 -->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatisstudy?serverTimezone=GMT"/>
                 <property name="username" value="root"/>
                 <property name="password" value="Li19980503"/>
             </dataSource>
