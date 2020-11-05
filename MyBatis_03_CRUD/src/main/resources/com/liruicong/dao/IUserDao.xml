@@ -7,4 +7,19 @@
     <select id="findAll" resultType="com.liruicong.domain.User">
         select * from user;
     </select>
+
+    <!-- 保存用户 -->
+    <insert id="saveUser" parameterType="com.liruicong.domain.User">
+        insert into user(username, address, sex, birthday)values(#{username}, #{address}, #{sex}, #{birthday});
+    </insert>
+
+    <!-- 更新用户 -->
+    <update id="updateUser" parameterType="com.liruicong.domain.User">
+        update user set username=#{username}, address=#{address}, sex=#{sex}, birthday=#{birthday} where id=#{id};
+    </update>
+
+    <!-- 删除用户 -->
+    <delete id="deleteUser" parameterType="Integer">
+        delete from user where id = #{id};
+    </delete>
 </mapper>
