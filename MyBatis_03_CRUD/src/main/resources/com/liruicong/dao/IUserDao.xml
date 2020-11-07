@@ -3,6 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liruicong.dao.IUserDao">
+    <!-- 配置查询结果的列名和实体类的属性名的对应关系 -->
+    <!-- 如果User实体类中的属性名和数据库中的字段不一样的话可以采用这种方式进行属性映射
+         使用时需要把下面的resultType改成resultMap="下面配置中的id"，否则resultType会覆盖resultMap配置
+         但是这样优缺点，会让Java多解析一段xml语句，所以执行效率会变慢，开发效率会变快。
+         在实际开发中需要权衡利弊进行使用
+    -->
+    <resultMap id="userMap" type="com.liruicong.domain.User">
+        <!-- 主键字段的对应 -->
+        <id property="userId" column="id"></id>
+        <!-- 非主键字段的对应 -->
+        <result property="userName" column="username"></result>
+        <result property="userAddress" column="address"></result>
+        <result property="userSex" column="sex"></result>
+        <result property="userBirthday" column="birthday"></result>
+    </resultMap>
+
     <!-- 查询所有 -->
     <select id="findAll" resultType="com.liruicong.domain.User">
         select * from user;
@@ -10,6 +26,10 @@
 
     <!-- 保存用户 -->
     <insert id="saveUser" parameterType="com.liruicong.domain.User">
+        <!-- 配置插入操作后，获取插入数据的id -->
+        <selectKey keyProperty="id" keyColumn="id" resultType="Integer" order="AFTER">
+            select last_insert_id();
+        </selectKey>
         insert into user(username, address, sex, birthday)values(#{username}, #{address}, #{sex}, #{birthday});
     </insert>
 
@@ -22,4 +42,26 @@
     <delete id="deleteUser" parameterType="Integer">
         delete from user where id = #{id};
     </delete>
+
+    <!-- 根据id查询用户 -->
+    <select id="findById" parameterType="Integer" resultType="com.liruicong.domain.User">
+        select * from user where id = #{uid};
+    </select>
+
+    <!-- 根据名称模糊查询 -->
+    <select id="findByName" parameterType="String" resultType="com.liruicong.domain.User">
+        select * from user where username like #{name};
+        <!-- 下面这种方法采用的是字符串拼接，会产生sql注入，上面的方法使用的是preparedStatement，不会产生sql注入 -->
+        <!-- select * from user where username like '%${value}%'; -->
+    </select>
+
+    <!-- 获取用户的总记录条数 -->
+    <select id="findTotal" resultType="int">
+        select count(id) from user;
+    </select>
+
+    <!-- 根据queryVo的条件查询用户 -->
+    <select id="findUserByVo" parameterType="com.liruicong.domain.QueryVo" resultType="com.liruicong.domain.User">
+        select * from user where username like #{user.username};
+    </select>
 </mapper>

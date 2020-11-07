@@ -1,5 +1,6 @@
 package com.liruicong.dao;
 
+import com.liruicong.domain.QueryVo;
 import com.liruicong.domain.User;
 
 import java.util.List;
@@ -30,4 +31,31 @@ public interface IUserDao {
      * @param userId
      */
     void deleteUser(Integer userId);
+
+    /**
+     * 根据id查询用户信息
+     * @param userId
+     * @return
+     */
+    User findById(Integer userId);
+
+    /**
+     * 根据名称模糊查询用户信息
+     * @param username
+     * @return
+     */
+    List<User> findByName(String username);
+
+    /**
+     * 查询总用户数
+     * @return
+     */
+    int findTotal();
+
+    /**
+     * 根据QueryVo中的条件查询用户
+     * @param vo
+     * @return
+     */
+    List<User> findUserByVo(QueryVo vo);
 }
