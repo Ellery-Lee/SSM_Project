@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.IAccountDao">
+
+    <!-- 查询所有 -->
+    <select id="findAll" resultType="account">
+        select * from account;
+    </select>
+
+    <!-- 查询所有账户同时包含用户名和地址信息 -->
+    <select id="findAllAccount" resultType="accountuser">
+        select a.*,u.username,u.address from account a , user u where u.id = a.uid;
+    </select>
+</mapper>
