@@ -1,8 +1,8 @@
 package com.itheima.test;
 
-import com.itheima.dao.IAccountDao;
-import com.itheima.domain.Account;
-import com.itheima.domain.AccountUser;
+
+import com.itheima.dao.IUserDao;
+import com.itheima.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,10 +14,10 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.util.List;
 
-public class AccountTest {
+public class UserTest {
     private InputStream in;
     private SqlSession sqlSession;
-    private IAccountDao accountDao;
+    private IUserDao userDao;
 
     @Before//用于在测试方法执行之前执行
     public void init()throws Exception{
@@ -28,7 +28,7 @@ public class AccountTest {
         //3.获取SqlSession对象
         sqlSession = factory.openSession(true);
         //4.获取dao的代理对象
-        accountDao = sqlSession.getMapper(IAccountDao.class);
+        userDao = sqlSession.getMapper(IUserDao.class);
     }
 
     @After//用于在测试方法执行之后执行
@@ -45,22 +45,11 @@ public class AccountTest {
      */
     @Test
     public void testFindAll(){
-        List<Account> accounts = accountDao.findAll();
-        for (Account account : accounts){
-            System.out.println("----------每个account的信息-----------");
-            System.out.println(account);
-            System.out.println(account.getUser());
-        }
-    }
-
-    /**
-     * 测试查询所有账户同时包含用户名称和地址
-     */
-    @Test
-    public void testFindAllAccountUser(){
-        List<AccountUser> aus = accountDao.findAllAccount();
-        for (AccountUser au : aus){
-            System.out.println(au);
+        List<User> users = userDao.findAll();
+        for(User user : users){
+            System.out.println("-------每个用户的信息-------");
+            System.out.println(user);
+            System.out.println(user.getRoles());
         }
     }
 
