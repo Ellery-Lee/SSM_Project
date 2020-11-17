@@ -1,6 +1,6 @@
 package com.itheima.test;
 
-//import com.itheima.dao.IUserDao;
+import com.itheima.dao.IUserDao;
 import com.itheima.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -21,7 +21,7 @@ public class UserTest {
 
     private InputStream in;
     private SqlSession sqlSession;
-//    private IUserDao userDao;
+    private IUserDao userDao;
 
     @Before//用于在测试方法执行之前执行
     public void init()throws Exception{
@@ -32,7 +32,7 @@ public class UserTest {
         //3.获取SqlSession对象
         sqlSession = factory.openSession(true);
         //4.获取dao的代理对象
-//        userDao = sqlSession.getMapper(IUserDao.class);
+        userDao = sqlSession.getMapper(IUserDao.class);
     }
 
     @After//用于在测试方法执行之后执行
@@ -49,7 +49,7 @@ public class UserTest {
      */
     @Test
     public void testFindAll(){
-//        List<User> users = userDao.findAll();
+        List<User> users = userDao.findAll();
 //        for(User user : users){
 //            System.out.println("-----每个用户的信息------");
 //            System.out.println(user);
