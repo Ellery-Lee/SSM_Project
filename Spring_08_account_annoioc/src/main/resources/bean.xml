@@ -20,7 +20,7 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <!-- 连接数据库的必备信息 -->
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/mybatisstudy?serverTimezone=GMT"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/springstudy?serverTimezone=GMT"></property>
         <property name="user" value="root"></property>
         <property name="password" value="Li19980503"></property>
     </bean>

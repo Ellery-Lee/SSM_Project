@@ -40,7 +40,7 @@ public class AccountServiceTest {
     @Test
     public void testSave(){
         Account account = new Account();
-        account.setUsername("1");
+        account.setUsername("test");
         account.setMoney(12345f);
         //1、获取容器
         ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
