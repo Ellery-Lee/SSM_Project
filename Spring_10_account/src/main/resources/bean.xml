@@ -7,19 +7,20 @@
     <bean id="accountService" class="com.liruicong.service.impl.AccountServiceImpl">
         <!-- 注入dao对象 -->
         <property name="accountDao" ref="accountDao"></property>
+        <!-- 注入事务管理器 -->
+        <property name="txManager" ref="txManager"></property>
     </bean>
 
     <!-- 配置Dao对象 -->
     <bean id="accountDao" class="com.liruicong.dao.impl.AccountDaoImpl">
         <!-- 注入QuerRunner -->
         <property name="runner" ref="runner"></property>
+        <!-- 注入ConnectionUtils -->
+        <property name="connectionUtils" ref="ConnectionUtils"></property>
     </bean>
 
     <!-- 配置QueryRunner对象 -->
-    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
-        <!-- 注入数据源 -->
-        <constructor-arg name="ds" ref="dataSource"></constructor-arg>
-    </bean>
+    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype"></bean>
 
     <!-- 配置数据源 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -28,5 +29,17 @@
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/springstudy?serverTimezone=GMT"></property>
         <property name="user" value="root"></property>
         <property name="password" value="Li19980503"></property>
+    </bean>
+
+    <!-- 配置Connection的工具类 ConnectionUtils -->
+    <bean id="ConnectionUtils" class="com.liruicong.utils.ConnectionUtils">
+        <!-- 注入数据源 -->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="txManager" class="com.liruicong.utils.TransactionManager">
+        <!-- 注入ConnectionUtils -->
+        <property name="connectionUtils" ref="ConnectionUtils"></property>
     </bean>
 </beans>
