@@ -1,5 +1,7 @@
 package com.liruicong.controller;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -16,6 +18,35 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    /**
+     * 跨服务器文件上传
+     * @param upload
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/fileupload3")
+    public String fileupload3(MultipartFile upload) throws Exception {
+        System.out.println("跨服务器文件上传");
+
+        //定义上传文件服务器路径
+        String path = "http://localhost:9090/SpringMVC_04_fileuploadserver_war/uploads/";
+
+        //说明上传文件项
+        //获取上传文件的名称
+        String fileName = upload.getOriginalFilename();
+        //把文件的名称设置唯一值：uuid
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        fileName = uuid + "_" + fileName;
+        //完成文件上传，跨服务器上传
+        //创建客户端的对象
+        Client client = Client.create();
+        //和图片的服务器进行连接
+        WebResource webResource = client.resource(path + fileName);
+        //上传文件
+        webResource.put(upload.getBytes());
+        return "success";
+    }
+
     /**
      * SpringMVC方式文件上传
      * @param request
