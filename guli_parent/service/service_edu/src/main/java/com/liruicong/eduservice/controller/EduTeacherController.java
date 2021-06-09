@@ -7,6 +7,7 @@ import com.liruicong.commonutils.R;
 import com.liruicong.eduservice.entity.EduTeacher;
 import com.liruicong.eduservice.entity.vo.TeacherQuery;
 import com.liruicong.eduservice.service.EduTeacherService;
+import com.liruicong.servicebase.exceptionhandler.GuliException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
