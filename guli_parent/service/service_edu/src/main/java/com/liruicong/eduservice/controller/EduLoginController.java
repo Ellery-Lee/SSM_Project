@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 模拟前端登录
+ * @author liruicong
+ * @since 2021-06-15
  */
 @CrossOrigin
 @RestController
