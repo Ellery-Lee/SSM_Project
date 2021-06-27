@@ -48,4 +48,33 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         courseDescriptionService.save(courseDescription);
         return cid;
     }
+
+    //根据课程id查询课程基本信息
+    @Override
+    public CourseInfoVo getCourseInfo(String courseId) {
+        //1、查询课程表
+        EduCourse eduCourse = this.getById(courseId);
+        CourseInfoVo courseInfoVo = new CourseInfoVo();
+        BeanUtils.copyProperties(eduCourse, courseInfoVo);
+        //2、查询描述表
+        EduCourseDescription courseDescription = courseDescriptionService.getById(courseId);
+        courseInfoVo.setDescription(courseDescription.getDescription());
+        return courseInfoVo;
+    }
+    //修改课程信息
+    @Override
+    public void updateCourseInfo(CourseInfoVo courseInfoVo) {
+        //1、修改课程表
+        EduCourse eduCourse = new EduCourse();
+        BeanUtils.copyProperties(courseInfoVo, eduCourse);
+        boolean b = this.updateById(eduCourse);
+        if(!b){
+            throw new GuliException(20001, "修改课程信息失败");
+        }
+        //2、修改描述表
+        EduCourseDescription description = new EduCourseDescription();
+        description.setId(courseInfoVo.getId());
+        description.setDescription(courseInfoVo.getDescription());
+        courseDescriptionService.updateById(description);
+    }
 }
