@@ -3,6 +3,7 @@ package com.liruicong.eduservice.service.impl;
 import com.liruicong.eduservice.entity.EduCourse;
 import com.liruicong.eduservice.entity.EduCourseDescription;
 import com.liruicong.eduservice.entity.vo.CourseInfoVo;
+import com.liruicong.eduservice.entity.vo.CoursePublishVo;
 import com.liruicong.eduservice.mapper.EduCourseMapper;
 import com.liruicong.eduservice.service.EduCourseDescriptionService;
 import com.liruicong.eduservice.service.EduCourseService;
@@ -76,5 +77,12 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         description.setId(courseInfoVo.getId());
         description.setDescription(courseInfoVo.getDescription());
         courseDescriptionService.updateById(description);
+    }
+    //根据课程id查询课程确认信息
+    @Override
+    public CoursePublishVo publishCourseInfo(String id) {
+        //调用mapper
+        CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(id);
+        return publishCourseInfo;
     }
 }
