@@ -55,7 +55,7 @@ public class EduVideo implements Serializable {
     private Long playCount;
 
     @ApiModelProperty(value = "是否可以试听：0收费 1免费")
-    private Integer isFree;
+    private Boolean isFree;
 
     @ApiModelProperty(value = "视频时长（秒）")
     private Float duration;
