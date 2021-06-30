@@ -2,6 +2,7 @@ package com.liruicong.eduservice.controller;
 
 
 import com.liruicong.commonutils.R;
+import com.liruicong.eduservice.client.VodClient;
 import com.liruicong.eduservice.entity.EduVideo;
 import com.liruicong.eduservice.service.EduVideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ import org.springframework.web.bind.annotation.*;
 public class EduVideoController {
     @Autowired
     private EduVideoService videoService;
+    //注入vodClient
+    @Autowired
+    private VodClient vodClient;
     //添加小节
     @PostMapping("addVideo")
     public R addVideo(@RequestBody EduVideo eduVideo){
@@ -28,10 +32,11 @@ public class EduVideoController {
         return R.ok();
     }
     //删除小节
-    //TODO后面这个方法需要完善：删除小节的时候，同时把里面视频删除
+    //TODO后面这个方法需要完善：删除小节的时候，同时把阿里云里面视频删除
     @DeleteMapping("{id}")
     public R deleteVideo(@PathVariable String id){
-        videoService.removeById(id);
+        //根据小节id获取视频id，调用方法实现视频删除
+        videoService.removeAlyVideo(id);
         return R.ok();
     }
     //根据小节id查询
