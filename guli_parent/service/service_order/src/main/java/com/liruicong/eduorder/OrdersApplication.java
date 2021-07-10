@@ -1,17 +1,19 @@
-package com.liruicong.educenter;
+package com.liruicong.eduorder;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan({"com.liruicong"})
-@MapperScan("com.liruicong.educenter.mapper")
-public class UcenterApplication {
+@EnableFeignClients
+@ComponentScan(basePackages = {"com.liruicong"})
+@MapperScan("com.liruicong.eduorder.mapper")
+public class OrdersApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UcenterApplication.class, args);
+        SpringApplication.run(OrdersApplication.class, args);
     }
 }

@@ -27,7 +27,6 @@ public class TeacherFrontController {
         Page<EduTeacher> pageTeacher = new Page<>(page, limit);
         Map<String, Object> map = teacherService.getTeacherFrontList(pageTeacher);
         //返回分页所有数据，因为前端框架不是element-ui，是nuxt
-
         return R.ok().data("map", map);
     }
     //2、讲师详情功能
