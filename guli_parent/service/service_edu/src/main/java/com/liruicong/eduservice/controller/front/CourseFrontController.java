@@ -45,10 +45,11 @@ public class CourseFrontController {
     public R getFrontCourseInfo(@PathVariable String courseId, HttpServletRequest request){
         //根据课程id，编写sql语句查询课程信息
         CourseWebVo courseWebVo = courseService.getBaseCourseInfo(courseId);
+        System.out.println(request);
+
         //根据课程id查询章节小节
         List<ChapterVo> chapterVideoList = chapterService.getChapterVideoByCourseId(courseId);
         //根据课程id和用户id查询当前课程是否已经支付过了
-        System.out.println(JwtUtils.getMemberIdByJwtToken(request));
         boolean buyCourse = ordersClient.isBuyCourse(courseId, JwtUtils.getMemberIdByJwtToken(request));
         return R.ok().data("courseWebVo", courseWebVo).data("chapterVideoList", chapterVideoList).data("isbuy", buyCourse);
     }

@@ -31,7 +31,7 @@ public class UcenterMemberController {
     //登录
     @PostMapping("login")
     public R loginUser(@RequestBody UcenterMember member){
-        //member对象封装手机号和密码
+        //member对象封装邮箱和密码
         //调用service方法实现登录
         //返回token值，使用jwt生成
         String token = memberService.login(member);

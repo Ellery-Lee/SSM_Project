@@ -1,12 +1,12 @@
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath:com/liruicong/smsservice/mapper/xml/*.xml
+  mapper-locations: classpath:com/liruicong/emailservice/mapper/xml/*.xml
 server:
   port: 8005
 spring:
   application:
-    name: service-msm
+    name: service-email
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: Li19980503
@@ -26,3 +26,25 @@ spring:
         min-idle: 0
     port: 6379
     timeout: 1800000
+  mail:
+    host: smtp.qq.com #个人邮箱
+    port: 465
+    username: 623568934@qq.com
+    password: zpbdgbztsfcvbbcj
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+  # nacos服务地址
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000

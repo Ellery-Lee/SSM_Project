@@ -48,7 +48,7 @@ public class WxApiController {
                 baseUrl,
                 ConstantWxUtils.WX_OPEN_APP_ID,
                 redirect_url,
-                "atguigu"
+                "liruicong"
         );
 
 

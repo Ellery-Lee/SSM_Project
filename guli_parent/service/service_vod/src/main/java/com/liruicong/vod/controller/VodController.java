@@ -46,6 +46,7 @@ public class VodController {
     @GetMapping("getPlayAuth/{id}")
     public R getPlayAuth(@PathVariable String id){
         try {
+            System.out.println(id);
             //创建初始化对象
             DefaultAcsClient client = InitVodClient.initVodClient(ConstantVodUtils.ACCESS_KEY_ID, ConstantVodUtils.ACCESS_KEY_SECRET);
             //创建获取凭证request和respond对象

@@ -1,4 +1,4 @@
-package com.liruicong.smsservice;
+package com.liruicong.emailservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @ComponentScan("com.liruicong")
-public class SmsApplication {
+public class EmailApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SmsApplication.class, args);
+        SpringApplication.run(EmailApplication.class);
     }
 }

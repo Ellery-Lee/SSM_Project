@@ -42,6 +42,10 @@ spring:
           uri: lb://service-cms
           predicates:
             - Path=/educms/** # 路径匹配
+        - id: service_email
+          uri: lb://service-email
+          predicates:
+            - Path=/eduemail/** # 路径匹配
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
